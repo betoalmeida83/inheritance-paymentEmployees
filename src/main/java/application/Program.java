@@ -12,20 +12,19 @@ public class Program {
         Locale.setDefault(Locale.US);
         Scanner input = new Scanner(System.in);
 
-        int n = 0;
         System.out.print("Enter the number of employees: ");
-        n = input.nextInt();
+        int n = input.nextInt();
 
         List<Employee> employeeList = new ArrayList<>(n);
 
         for (int i = 1; i <= n; i++) {
-            char option;
             System.out.println("Employee #" + i + " data:");
             System.out.print("Outsourced (y/n)? ");
-            option = input.next().toLowerCase().charAt(0);
+            char option = input.next().charAt(0);
             if (option == 'n') {
                 System.out.print("Name: ");
-                String name = input.next();
+                input.nextLine();
+                String name = input.nextLine();
                 System.out.print("Hours: ");
                 int hours = input.nextInt();
                 System.out.print("Value per hour: ");
@@ -33,7 +32,8 @@ public class Program {
                 employeeList.add(new Employee(name, hours, valuePerHour));
             } else if(option == 'y') {
                 System.out.print("Name: ");
-                String name = input.next();
+                input.nextLine();
+                String name = input.nextLine();
                 System.out.print("Hours: ");
                 int hours = input.nextInt();
                 System.out.print("Value per hour: ");
@@ -48,8 +48,8 @@ public class Program {
 
         System.out.println();
         System.out.println("PAYMENTS:");
-        for (int i = 0; i < n; i++) {
-            System.out.printf("%s - $ %.2f%n", employeeList.get(i).getName(), employeeList.get(i).payment());
+        for (Employee  employee : employeeList) {
+            System.out.printf("%s - $ %.2f%n", employee.getName(), employee.payment());
         }
 
         input.close();
